@@ -33,20 +33,31 @@ function showMovies(data){
     const movieElement = document.createElement('div')
     movieElement.classList.add('movie')
 
-    movieElement.innerHTML = `<div class="movie">
+    movieElement.innerHTML = `
     <img src="${IMG_PATH + poster_path}" alt="${title}">
     <div class="movie-info">
-      <h3>Movie Title</h3>
-      <span class="green">9.8</span>
+      <h3>${title}</h3>
+      <span class=${getClassByRate(vote_average)}>${vote_average}</span>
     </div>
-
     <div class="overview">
       <h3>Overview</h3>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis est unde tempore dignissimos hic in, ipsum nihil quasi quisquam iure reiciendis deserunt, impedit incidunt voluptatem nobis. Sint aspernatur rerum esse.
+      ${overview}
     </div>
-  </div>`
+   `
+
+  main.appendChild(movieElement)
 
   })
+}
+
+function getClassByRate(vote) {
+  if(vote >= 8){
+    return 'green'
+  } else if (vote >= 5){
+    return 'orange'
+  } else {
+    return 'red'
+  }
 }
 
 form.addEventListener('submit', (e) => {
