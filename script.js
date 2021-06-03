@@ -11,6 +11,7 @@ const search = document.getElementById('search')
 // Get initial movies
 getMovies(API_URL)
 
+//FETCHING MOVIES BY URL
 async function getMovies(url){
   const res = await fetch(url)
   const data = await res.json()
@@ -24,9 +25,14 @@ form.addEventListener('submit', (e) => {
   const searchTerm = search.value
 
   if(searchTerm && searchTerm !== ''){
+
+    //returns search API and concatinates search term
     getMovies(SEARCH_API + searchTerm)
 
+    //clears search
     search.value = ''
+    
+    // If no input, reload page
   } else {
     window.location.reload()
   }
