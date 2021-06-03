@@ -3,8 +3,10 @@ const API_URL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280'
 
 // ending search with single double quotes to concat with search
-const SEARCH_URL = 'https://api.themoviedb.org/3/search/movie?api_key=ff230f9ce564a1adc6eadf71767706fe&query="'
+const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=ff230f9ce564a1adc6eadf71767706fe&query="'
 
+const form = document.getElementById('form')
+const search = document.getElementById('search')
 
 // Get initial movies
 getMovies(API_URL)
@@ -15,3 +17,17 @@ async function getMovies(url){
 
   console.log(data.results)
 }
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const searchTerm = search.value
+
+  if(searchTerm && searchTerm !== ''){
+    getMovies(SEARCH_API + searchTerm)
+
+    search.value = ''
+  } else {
+    window.location.reload()
+  }
+} )
